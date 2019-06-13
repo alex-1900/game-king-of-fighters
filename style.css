@@ -1,0 +1,229 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body, .app {
+    font: 14px Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+#controller {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    width: 102px;
+    height: 102px;
+    z-index: 2;
+    transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    -o-transform:rotate(45deg);
+    border-radius: 100%;
+}
+#controller span {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #333;
+    background: rgba(77, 16, 99, 0.4);
+}
+
+#actions {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 208px;
+    height: 52px;
+    z-index: 2;
+}
+
+#actions span {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #333;
+    background: rgba(77, 16, 99, 0.4);
+}
+
+.helpers {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 104px;
+    z-index: 2;
+}
+.helpers .rocker {
+    float: left;
+    width: 104px;
+    height: 104px;
+    transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    -o-transform:rotate(45deg);
+    border-radius: 100%;
+}
+.helpers .rocker span {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #333;
+    background: rgba(156, 215, 255, 0.4);
+}
+.helpers .rocker span:nth-child(1) {
+    border-top-left-radius: 100%;
+}
+.helpers .rocker span:nth-child(2) {
+    border-top-right-radius: 100%;
+}
+.helpers .rocker span:nth-child(3) {
+    border-bottom-left-radius: 100%;
+}
+.helpers .rocker span:nth-child(4) {
+    border-bottom-right-radius: 100%;
+}
+
+.helpers .skills-bar {
+    margin-top: 40px;
+    float: right;
+    height: 57px;
+}
+.helpers .skills-bar span {
+    float: left;
+    border-radius: 100%;
+    background: rgba(248, 155, 155, 0.4);
+    width: 45px;
+    height: 55px;
+    margin-right: 1rem;
+    color: white;
+    text-align: center;
+    line-height: 55px;
+    font-weight: bold;
+}
+
+.info, .notice {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background: rgba(0,0,0,.9);
+}
+
+.info .title, .info .intro {
+    color: white;
+    text-decoration: underline;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.info .loader {
+    width: 100%;
+    height: 30px;
+    margin-top: 2rem;
+    display: none;
+}
+
+.info .loader .content {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+}
+
+.info .loader .content .fill {
+    width: 0;
+    height: 100%;
+    border-radius: 6px;
+    background: rgb(62, 143, 219);
+    box-shadow: 0 0 16px rgb(119, 189, 255);
+}
+
+.info .confirm {
+    display: none;
+    width: 100%;
+    height: 50px;
+    margin-top: 2rem;
+}
+
+.info .confirm .fight {
+    display: block;
+    width: 100px;
+    height: 45px;
+    border-radius: 6px;
+    border: 0;
+    margin: 0 auto;
+    color: white;
+    font-weight: bold;
+    background: rgba(32, 112, 204);
+    box-shadow:0 0 20px rgb(119, 189, 255);
+}
+
+.app canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.notice {
+    display: none;
+    background: rgb(216, 216, 216);
+    z-index: 4;
+    display: inline;
+}
+
+.notice h2 {
+    text-align: center;
+    padding-top: 2em;
+}
+
+.notice .phone-image {
+    width: 100%;
+    height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+@keyframes haha1{
+    0%{transform:rotate(0deg);}
+    25%{transform:rotate(45deg);}
+    50%{transform:rotate(90deg);}
+    75%{transform:rotate(90deg);}
+    90%{transform:rotate(90deg);}
+    100%{transform:rotate(0deg);}
+}
+.notice .phone-image img {
+    display: block;
+    width: 40px;
+    height: auto;
+    margin: 0 auto;
+    animation: haha1 1.2s linear infinite;
+}
+
+.info .flow-notice {
+    text-align: center;
+    padding-top: 1em;
+    color: white;
+}
+.info .flow-notice p {
+    font-size: .8rem;
+}
+.info .flow-notice button {
+    display: block;
+    width: 80px;
+    height: 35px;
+    border: 0;
+    margin: 0 auto;
+    color: white;
+    margin-top: 1rem;
+    font-weight: bold;
+    background: rgb(67, 106, 151);
+}
