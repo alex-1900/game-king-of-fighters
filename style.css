@@ -12,6 +12,12 @@ body, .app {
     height: 100%;
 }
 
+.app {
+    background: url(./images/helpers/bg.jpg);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+}
+
 #controller {
     position: fixed;
     bottom: 10px;
@@ -108,7 +114,7 @@ body, .app {
     font-weight: bold;
 }
 
-.info, .notice {
+.info, .notice, .fighters {
     position: fixed;
     left: 0;
     top: 0;
@@ -192,6 +198,25 @@ body, .app {
     padding-bottom: 2rem;
 }
 
+.fighters {
+    display: none;
+}
+
+.fighters .fighter {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+}
+.fighters .fighter img {
+    width: 50px;
+    height: 50px;
+}
+.fighters h1 {
+    color: white;
+    text-align: center;
+}
+
 @keyframes haha1{
     0%{transform:rotate(0deg);}
     25%{transform:rotate(45deg);}
@@ -226,4 +251,62 @@ body, .app {
     margin-top: 1rem;
     font-weight: bold;
     background: rgb(67, 106, 151);
+}
+
+.app .blood {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 100%;
+    height: 20px;
+}
+.app .blood .content {
+    height: 100%;
+    width: 45%;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #DB7093;
+}
+.app .blood .content:nth-child(1) {
+    float: left;
+    margin-left: 2%;
+}
+.app .blood .content:nth-child(2) {
+    float: right;
+    margin-right: 2%;
+}
+.app .blood .content .fill {
+    float: left;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    background: #DB7093;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: rgba(51, 51, 51, 0.8);
+}
+.popup .box {
+    width: 60%;
+    height: 60%;
+    background: #FFFAF0;
+    margin: 0 auto;
+    margin-top: 10%;
+    border-radius: 10px;
+}
+.popup .box h1 {
+    position: absolute;
+    color: #FFD700;
+    width: 60%;
+    text-align: center;
+    font-size: 35px;
+    top: 50%;
+    margin-top: -35px;
 }

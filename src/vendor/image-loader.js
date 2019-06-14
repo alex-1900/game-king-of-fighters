@@ -6,10 +6,6 @@
         this.promises = [];
         this.eachLoadHandle = null;
         this.data = {};
-        for (var key in this.files) {
-            var fileName = this.files[key];
-            this.attach(key, fileName);
-        }
     }
 
     imageLoader.prototype._loadByFileName = function(key, fileName) {
@@ -43,6 +39,10 @@
     };
 
     imageLoader.prototype.load = function() {
+        for (var key in this.files) {
+            var fileName = this.files[key];
+            this.attach(key, fileName);
+        }
         var data = this.data;
         return Promise.all(this.promises).then(function(images) {
             return data

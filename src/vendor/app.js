@@ -29,8 +29,10 @@
      * 应用程序开始运行
      */
     app.prototype.start = function() {
-        this._setState('isRunning', true);
-        requestAnimationFrame(this._process);
+        if (!this.state.isRunning) {
+            this._setState('isRunning', true);
+            requestAnimationFrame(this._process);
+        }
     };
 
     /**

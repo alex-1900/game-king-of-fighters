@@ -57,10 +57,33 @@
         </div>
     </div>
 
+    <div class="fighters" id="fighters">
+        <h1>选择角色</h1>
+        <div class="fighter" id="bili" reload="90"><img src="./images/bili/head-0.png" alt="Bili" /></div>
+        <div class="fighter" id="chunli" reload="70"><img src="./images/chunli/head-0.png" alt="Chunli" /></div>
+    </div>
+
+    <div class="popup" id="popup">
+        <div class="box">
+            <h1>YOU WIN !</h1>
+        </div>
+    </div>
+
     <!-- APPLICATION -->
 
     <article class="app" id="app">
-        <!-- Prepare canvas layer -->
+        <div id="canvases">
+            <!-- Prepare canvas layer -->
+        </div>
+        <div class="blood" id="blood">
+            <div class="content">
+                <div class="fill" id="blood-fill-remote"></div>
+            </div>
+
+            <div class="content">
+                <div class="fill" id="blood-fill-local"></div>
+            </div>
+        </div>
         <div class="helpers" id="helpers">
             <div class="rocker">
                 <span id="up"></span>
@@ -92,6 +115,140 @@ screenNotice();
 </script>
 
 <script>
+var neededImages = {
+    bili_walk_0: './images/bili/1-0.png',
+    bili_walk_1: './images/bili/1-1.png',
+    bili_walk_2: './images/bili/1-2.png',
+    bili_walk_3: './images/bili/1-3.png',
+    bili_walk_4: './images/bili/1-4.png',
+    bili_walk_5: './images/bili/1-5.png',
+
+    bili_up_0: './images/bili/6-0.png',
+    bili_up_1: './images/bili/6-1.png',
+    bili_up_2: './images/bili/6-2.png',
+    bili_up_3: './images/bili/6-3.png',
+
+    bili_down_0: './images/bili/7-0.png',
+    bili_down_1: './images/bili/7-1.png',
+    bili_down_2: './images/bili/7-2.png',
+
+    bili_A_0: './images/bili/2-0.png',
+    bili_A_1: './images/bili/2-1.png',
+    bili_A_2: './images/bili/2-2.png',
+    bili_A_3: './images/bili/2-3.png',
+
+    bili_B_0: './images/bili/3-0.png',
+    bili_B_1: './images/bili/3-1.png',
+    bili_B_2: './images/bili/3-2.png',
+    bili_B_3: './images/bili/3-3.png',
+    bili_B_4: './images/bili/3-4.png',
+    bili_B_5: './images/bili/3-5.png',
+    bili_B_6: './images/bili/3-6.png',
+    bili_B_7: './images/bili/3-7.png',
+
+    bili_C_0: './images/bili/4-0.png',
+    bili_C_1: './images/bili/4-1.png',
+    bili_C_2: './images/bili/4-2.png',
+
+    bili_D_0: './images/bili/5-0.png',
+    bili_D_1: './images/bili/5-1.png',
+    bili_D_2: './images/bili/5-2.png',
+    bili_D_3: './images/bili/5-3.png',
+    bili_D_4: './images/bili/5-4.png',
+    bili_D_5: './images/bili/5-5.png',
+    bili_D_6: './images/bili/5-6.png',
+    bili_D_7: './images/bili/5-7.png',
+    bili_D_8: './images/bili/5-8.png',
+
+    chunli_walk_0: './images/chunli/2-0.png',
+    chunli_walk_1: './images/chunli/2-1.png',
+    chunli_walk_2: './images/chunli/2-2.png',
+    chunli_walk_3: './images/chunli/2-3.png',
+    chunli_walk_4: './images/chunli/2-4.png',
+    chunli_walk_5: './images/chunli/2-5.png',
+    chunli_walk_6: './images/chunli/2-6.png',
+    chunli_walk_7: './images/chunli/2-7.png',
+    chunli_walk_8: './images/chunli/2-8.png',
+    chunli_walk_9: './images/chunli/2-9.png',
+    chunli_walk_10: './images/chunli/2-10.png',
+    chunli_walk_11: './images/chunli/2-11.png',
+
+    chunli_up_0: './images/chunli/6-0.png',
+    chunli_up_1: './images/chunli/6-1.png',
+    chunli_up_2: './images/chunli/6-2.png',
+    chunli_up_3: './images/chunli/6-3.png',
+    chunli_up_4: './images/chunli/6-4.png',
+    chunli_up_5: './images/chunli/6-5.png',
+    
+    chunli_down_0: './images/chunli/7-0.png',
+    chunli_down_1: './images/chunli/7-1.png',
+    chunli_down_2: './images/chunli/7-2.png',
+
+    chunli_A_0: './images/chunli/5-0.png',
+    chunli_A_1: './images/chunli/5-1.png',
+    chunli_A_2: './images/chunli/5-2.png',
+    chunli_A_3: './images/chunli/5-3.png',
+    chunli_A_4: './images/chunli/5-4.png',
+    chunli_A_5: './images/chunli/5-5.png',
+    chunli_A_6: './images/chunli/5-6.png',
+    chunli_A_7: './images/chunli/5-7.png',
+    chunli_A_8: './images/chunli/5-8.png',
+    chunli_A_9: './images/chunli/5-9.png',
+    chunli_A_10: './images/chunli/5-10.png',
+
+    chunli_B_0: './images/chunli/3-0.png',
+    chunli_B_1: './images/chunli/3-1.png',
+    chunli_B_2: './images/chunli/3-2.png',
+    chunli_B_3: './images/chunli/3-3.png',
+    chunli_B_4: './images/chunli/3-4.png',
+    chunli_B_5: './images/chunli/3-5.png',
+
+    chunli_C_0: './images/chunli/4-0.png',
+    chunli_C_1: './images/chunli/4-1.png',
+    chunli_C_2: './images/chunli/4-2.png',
+    chunli_C_3: './images/chunli/4-3.png',
+    chunli_C_4: './images/chunli/4-4.png',
+    chunli_C_5: './images/chunli/4-5.png',
+    chunli_C_6: './images/chunli/4-6.png',
+    chunli_C_7: './images/chunli/4-7.png',
+    chunli_C_8: './images/chunli/4-8.png',
+    chunli_C_9: './images/chunli/4-9.png',
+    chunli_C_10: './images/chunli/4-10.png',
+
+    chunli_D_0: './images/chunli/1-0.png',
+    chunli_D_1: './images/chunli/1-1.png',
+    chunli_D_2: './images/chunli/1-2.png',
+    chunli_D_3: './images/chunli/1-3.png',
+    chunli_D_4: './images/chunli/1-4.png',
+    chunli_D_5: './images/chunli/1-5.png',
+    chunli_D_6: './images/chunli/1-6.png',
+    chunli_D_7: './images/chunli/1-7.png',
+    chunli_D_8: './images/chunli/1-8.png',
+    chunli_D_9: './images/chunli/1-9.png',
+    chunli_D_10: './images/chunli/1-10.png',
+    chunli_D_11: './images/chunli/1-11.png',
+    chunli_D_12: './images/chunli/1-12.png',
+    chunli_D_13: './images/chunli/1-13.png',
+    chunli_D_14: './images/chunli/1-14.png',
+    chunli_D_15: './images/chunli/1-15.png',
+    chunli_D_16: './images/chunli/1-16.png',
+    chunli_D_17: './images/chunli/1-17.png',
+    chunli_D_18: './images/chunli/1-18.png',
+    chunli_D_19: './images/chunli/1-19.png',
+    chunli_D_20: './images/chunli/1-20.png',
+    chunli_D_21: './images/chunli/1-21.png',
+    chunli_D_22: './images/chunli/1-22.png',
+    chunli_D_23: './images/chunli/1-23.png',
+    chunli_D_24: './images/chunli/1-24.png',
+    chunli_D_25: './images/chunli/1-25.png',
+    chunli_D_26: './images/chunli/1-26.png',
+    chunli_D_27: './images/chunli/1-27.png',
+    chunli_D_28: './images/chunli/1-28.png',
+
+};
+</script>
+
+<script>
 var elementApp = document.getElementById('app');
 var elementInfo = document.getElementById('info');
 var elementLoader = document.getElementById('loader');
@@ -107,9 +264,58 @@ var elementA = document.getElementById('skill-a');
 var elementB = document.getElementById('skill-b');
 var elementC = document.getElementById('skill-c');
 var elementD = document.getElementById('skill-d');
+var elementsFighter = document.getElementsByClassName('fighter');
+var elementFighters = document.getElementById('fighters');
+var elementBloodFillRemote = document.getElementById('blood-fill-remote');
+var elementBloodFillLocal = document.getElementById('blood-fill-local');
+var elementPopup = document.getElementById('popup');
+var elementCanvases = document.getElementById('canvases');
+
+elementConfirm.onclick = function(event) {
+    requestFullScreen();
+    elementInfo.style.display = 'none';
+    elementFighters.style.display = 'block';
+};
+
+elementPopup.onclick = function(event) {
+    elementPopup.style.display = 'none';
+    elementFighters.style.display = 'block';
+};
+
+function initialGame(localName, localCount, images) {
+    elementPopup.style.display = 'none';
+    elementBloodFillRemote.style.width = '100%';
+    elementBloodFillLocal.style.width = '100%';
+
+    var localClient = app.attachClient(function(id) {
+        return new ClientBili(id, localLayer, images, constants.DIRECTION_LEFT, localName, localCount);
+    });
+    var remoteClient = app.attachClient(function(id) {
+        return new ClientBili(id, remoteLayer, images, constants.DIRECTION_RIGHT, 'bili');
+    });
+
+    var helper = new Helper(
+        elementUp,
+        elementRight,
+        elementDown,
+        elementLeft,
+        elementA,
+        elementB,
+        elementC,
+        elementD,
+        localClient,
+        remoteClient,
+        elementBloodFillRemote,
+        elementBloodFillLocal,
+        elementPopup
+    );
+
+    elementFighters.style.display = 'none';
+    app.start();
+}
 
 elementActionLoad.onclick = function(event) {
-
+    //  init app
     (function() {
         var clientWidth = document.body.clientWidth;
         var clientHeight = document.body.clientHeight;
@@ -122,132 +328,13 @@ elementActionLoad.onclick = function(event) {
         var _fixed = (clientWidth - _width) / 2;
         elementApp.style.left = _fixed + 'px';
         window.app = new App(elementApp, _width, _height);
+
+        window.localLayer = new Layer(elementApp, app.width, app.height);
+        window.remoteLayer = new Layer(elementApp, app.width, app.height);
     })();
 
     elementFlowNotice.style.display = 'none';
     elementLoader.style.display = 'block';
-
-    var neededImages = {
-        bili_walk_0: './images/bili/1-0.png',
-        bili_walk_1: './images/bili/1-1.png',
-        bili_walk_2: './images/bili/1-2.png',
-        bili_walk_3: './images/bili/1-3.png',
-        bili_walk_4: './images/bili/1-4.png',
-        bili_walk_5: './images/bili/1-5.png',
-
-        bili_up_0: './images/bili/6-0.png',
-        bili_up_1: './images/bili/6-1.png',
-        bili_up_2: './images/bili/6-2.png',
-        bili_up_3: './images/bili/6-3.png',
-
-        bili_down_0: './images/bili/7-0.png',
-        bili_down_1: './images/bili/7-1.png',
-        bili_down_2: './images/bili/7-2.png',
-
-        bili_A_0: './images/bili/2-0.png',
-        bili_A_1: './images/bili/2-1.png',
-        bili_A_2: './images/bili/2-2.png',
-        bili_A_3: './images/bili/2-3.png',
-
-        bili_B_0: './images/bili/3-0.png',
-        bili_B_1: './images/bili/3-1.png',
-        bili_B_2: './images/bili/3-2.png',
-        bili_B_3: './images/bili/3-3.png',
-        bili_B_4: './images/bili/3-4.png',
-        bili_B_5: './images/bili/3-5.png',
-        bili_B_6: './images/bili/3-6.png',
-        bili_B_7: './images/bili/3-7.png',
-
-        bili_C_0: './images/bili/4-0.png',
-        bili_C_1: './images/bili/4-1.png',
-        bili_C_2: './images/bili/4-2.png',
-
-        bili_D_0: './images/bili/5-0.png',
-        bili_D_1: './images/bili/5-1.png',
-        bili_D_2: './images/bili/5-2.png',
-        bili_D_3: './images/bili/5-3.png',
-        bili_D_4: './images/bili/5-4.png',
-        bili_D_5: './images/bili/5-5.png',
-        bili_D_6: './images/bili/5-6.png',
-        bili_D_7: './images/bili/5-7.png',
-        bili_D_8: './images/bili/5-8.png',
-
-        chunli_walk_0: './images/chunli/2-0.png',
-        chunli_walk_1: './images/chunli/2-1.png',
-        chunli_walk_2: './images/chunli/2-2.png',
-        chunli_walk_3: './images/chunli/2-3.png',
-        chunli_walk_4: './images/chunli/2-4.png',
-        chunli_walk_5: './images/chunli/2-5.png',
-        chunli_walk_6: './images/chunli/2-6.png',
-        chunli_walk_7: './images/chunli/2-7.png',
-        chunli_walk_8: './images/chunli/2-8.png',
-        chunli_walk_9: './images/chunli/2-9.png',
-        chunli_walk_10: './images/chunli/2-10.png',
-        chunli_walk_11: './images/chunli/2-11.png',
-
-        chunli_A_0: './images/chunli/5-0.png',
-        chunli_A_1: './images/chunli/5-1.png',
-        chunli_A_2: './images/chunli/5-2.png',
-        chunli_A_3: './images/chunli/5-3.png',
-        chunli_A_4: './images/chunli/5-4.png',
-        chunli_A_5: './images/chunli/5-5.png',
-        chunli_A_6: './images/chunli/5-6.png',
-        chunli_A_7: './images/chunli/5-7.png',
-        chunli_A_8: './images/chunli/5-8.png',
-        chunli_A_9: './images/chunli/5-9.png',
-        chunli_A_10: './images/chunli/5-10.png',
-
-        chunli_B_0: './images/chunli/3-0.png',
-        chunli_B_1: './images/chunli/3-1.png',
-        chunli_B_2: './images/chunli/3-2.png',
-        chunli_B_3: './images/chunli/3-3.png',
-        chunli_B_4: './images/chunli/3-4.png',
-        chunli_B_5: './images/chunli/3-5.png',
-
-        chunli_C_0: './images/chunli/4-0.png',
-        chunli_C_1: './images/chunli/4-1.png',
-        chunli_C_2: './images/chunli/4-2.png',
-        chunli_C_3: './images/chunli/4-3.png',
-        chunli_C_4: './images/chunli/4-4.png',
-        chunli_C_5: './images/chunli/4-5.png',
-        chunli_C_6: './images/chunli/4-6.png',
-        chunli_C_7: './images/chunli/4-7.png',
-        chunli_C_8: './images/chunli/4-8.png',
-        chunli_C_9: './images/chunli/4-9.png',
-        chunli_C_10: './images/chunli/4-10.png',
-
-        chunli_D_0: './images/chunli/1-0.png',
-        chunli_D_1: './images/chunli/1-1.png',
-        chunli_D_2: './images/chunli/1-2.png',
-        chunli_D_3: './images/chunli/1-3.png',
-        chunli_D_4: './images/chunli/1-4.png',
-        chunli_D_5: './images/chunli/1-5.png',
-        chunli_D_6: './images/chunli/1-6.png',
-        chunli_D_7: './images/chunli/1-7.png',
-        chunli_D_8: './images/chunli/1-8.png',
-        chunli_D_9: './images/chunli/1-9.png',
-        chunli_D_10: './images/chunli/1-10.png',
-        chunli_D_11: './images/chunli/1-11.png',
-        chunli_D_12: './images/chunli/1-12.png',
-        chunli_D_13: './images/chunli/1-13.png',
-        chunli_D_14: './images/chunli/1-14.png',
-        chunli_D_15: './images/chunli/1-15.png',
-        chunli_D_16: './images/chunli/1-16.png',
-        chunli_D_17: './images/chunli/1-17.png',
-        chunli_D_18: './images/chunli/1-18.png',
-        chunli_D_19: './images/chunli/1-19.png',
-        chunli_D_20: './images/chunli/1-20.png',
-        chunli_D_21: './images/chunli/1-21.png',
-        chunli_D_22: './images/chunli/1-22.png',
-        chunli_D_23: './images/chunli/1-23.png',
-        chunli_D_24: './images/chunli/1-24.png',
-        chunli_D_25: './images/chunli/1-25.png',
-        chunli_D_26: './images/chunli/1-26.png',
-        chunli_D_27: './images/chunli/1-27.png',
-        chunli_D_28: './images/chunli/1-28.png',
-
-    };
-
     var loader = app.loadImages(neededImages);
 
     (function() {
@@ -266,36 +353,15 @@ elementActionLoad.onclick = function(event) {
 
     loader.load().then(function(_images) {
         var images = pixelReverseArray(_images);
-        elementConfirm.onclick = function(event) {
-            requestFullScreen();
-            elementInfo.style.display = 'none';
-
-            var localLayer = new Layer(elementApp, app.width, app.height);
-            var remoteLayer = new Layer(elementApp, app.width, app.height);
-
-            var localClient = app.attachClient(function(id) {
-                return new ClientBili(id, localLayer, images, constants.DIRECTION_LEFT, 'chunli', 70);
-            });
-
-            var remoteClient = app.attachClient(function(id) {
-                return new ClientBili(id, remoteLayer, images, constants.DIRECTION_RIGHT, 'bili');
-            });
-
-            var helper = new Helper(
-                elementUp,
-                elementRight,
-                elementDown,
-                elementLeft,
-                elementA,
-                elementB,
-                elementC,
-                elementD,
-                localClient,
-                remoteClient
-            );
-
-            app.start();
-        };
+        for (var i = 0; i < elementsFighter.length; i++) {
+            (function() {
+                var fighter = elementsFighter[i];
+                fighter.onclick = function(event) {
+                    var reloadCount = fighter.getAttribute('reload');
+                    initialGame(fighter.id, reloadCount, images);
+                };
+            })();
+        }
     });
 }
 

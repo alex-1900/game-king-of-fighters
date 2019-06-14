@@ -11,7 +11,10 @@
         elementC,
         elementD,
         localClient,
-        remoteClient
+        remoteClient,
+        elementBloodFillRemote,
+        elementBloodFillLocal,
+        elementPopup
     ) {
         this.elementUp = elementUp;
         this.elementRight = elementRight;
@@ -23,6 +26,14 @@
         this.elementD = elementD;
         this.localClient = localClient;
         this.remoteClient = remoteClient;
+        this.elementBloodFillRemote = elementBloodFillRemote;
+        this.elementBloodFillLocal = elementBloodFillLocal;
+        this.elementPopup = elementPopup;
+
+        this.state = {
+            remoteBlood: 100,
+            localBlood: 100
+        }
 
         this.elementUp.ontouchstart = this._handleImageType(constants.IMAGE_TYPE_UP);
         this.elementRight.ontouchstart = this._handleDirection(constants.ACTION_RIGHT);
@@ -59,7 +70,21 @@
         return (function(event) {
             if (!this.localClient.isSkilling()) {
                 this.localClient.handleImageType(type);
-                this.collisionTest(type);
+                var isCollision = this.collisionTest(type);
+                if (isCollision) {
+                    var localName = this.localClient.name;
+                    var remoteBloodOff = constants[localName]['BLOOD_' + type];
+                    this.state.remoteBlood -= remoteBloodOff;
+                    if (this.state.remoteBlood > 0) {
+                        setTimeout((function() {
+                            this.elementBloodFillRemote.style.width = this.state.remoteBlood + '%';
+                        }).bind(this), 300);
+                    } else {
+                        app.stop();
+                        this.elementBloodFillRemote.style.width = '0';
+                        this.elementPopup.style.display = 'block';
+                    }
+                }
             }
         }).bind(this);
     };
@@ -86,7 +111,7 @@
                 leftX < remoteInfo.x + remoteInfo.baseWidth && 
                 localInfo.x >= remoteInfo.x - remoteInfo.baseWidth / 2
             ) {
-                console.log(1);
+                return true;
             }
         }
         if (localInfo.direction == constants.DIRECTION_RIGHT) {
@@ -95,9 +120,10 @@
                 rightX > remoteInfo.x && 
                 localInfo.x + localInfo.baseWidth <= remoteInfo.x + remoteInfo.baseWidth / 2
             ) {
-                console.log(2);
+                return true;
             }
         }
+        return false;
     };
 
     window.Helper = helper;

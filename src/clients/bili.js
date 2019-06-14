@@ -167,7 +167,7 @@
     }
 
     bili.prototype.terminate = function() {
-        this.clear();
+        this.layer.clearRect(0, 0, this.layer.canvas.width, this.layer.canvas.height);
         app.detachClient(this.id);
     };
 

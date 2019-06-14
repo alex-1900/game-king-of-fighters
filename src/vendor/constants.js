@@ -31,10 +31,14 @@ window.constants = {
         SCOPE_WALK: 0,
         SCOPE_UP: 0,
         SCOPE_DOWN: 0,
+        BLOOD_A: 10,
+        BLOOD_B: 10,
+        BLOOD_C: 5,
+        BLOOD_D: 15
     },
     chunli: {
         COUNT_walk: 11,
-        COUNT_up: 3,
+        COUNT_up: 5,
         COUNT_down: 2,
         COUNT_A: 10,
         COUNT_B: 5,
@@ -47,5 +51,9 @@ window.constants = {
         SCOPE_WALK: 0,
         SCOPE_UP: 0,
         SCOPE_DOWN: 0,
+        BLOOD_A: 15,
+        BLOOD_B: 5,
+        BLOOD_C: 10,
+        BLOOD_D: 25
     }
 };

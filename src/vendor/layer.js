@@ -10,6 +10,7 @@
      */
     function layer(element, width, height, fixed) {
         this.canvas = document.createElement('canvas');
+        this.canvas.className = 'layer';
         this.canvas.style.left = fixed + 'px';
         this.canvas.width = width;
         this.canvas.height = height
